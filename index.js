@@ -3,10 +3,8 @@ var queue = require('./lib/queue')
 
 
 module.exports = function(robot) {
-  robot.brain.on('loaded', function() {
-    robot.brain.deploy = robot.brain.deploy || {};
-    queue.init(robot.brain.deploy);
-  });
+  robot.brain.deploy = robot.brain.deploy || {};
+  queue.init(robot.brain.deploy);
 
   robot.respond(/dq help/i, help);
   robot.respond(/dq (add)(.*)?/i, queueUser);
