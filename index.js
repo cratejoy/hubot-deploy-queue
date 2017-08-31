@@ -8,14 +8,14 @@ module.exports = function(robot) {
     queue.init(robot.brain.deploy);
   });
 
-  robot.respond(/deploy help/i, help);
-  robot.respond(/deploy (add)(.*)?/i, queueUser);
-  robot.respond(/deploy (done|complete|donzo)/i, dequeueUser);
-  robot.respond(/deploy (current|who\'s (deploying|at bat))/i, whosDeploying);
-  robot.respond(/deploy (next|who\'s (next|on first|on deck))/i, whosNext);
-  robot.respond(/deploy (remove|kick) (.*)/i, removeUser);
-  robot.respond(/deploy (list)/i, listQueue);
-  robot.respond(/deploy (dump|debug)/i, queueDump);
+  robot.respond(/queue help/i, help);
+  robot.respond(/queue (add)(.*)?/i, queueUser);
+  robot.respond(/queue (done|complete|donzo)/i, dequeueUser);
+  robot.respond(/queue (current|who\'s (deploying|at bat))/i, whosDeploying);
+  robot.respond(/queue (next|who\'s (next|on first|on deck))/i, whosNext);
+  robot.respond(/queue (remove|kick) (.*)/i, removeUser);
+  robot.respond(/queue (list)/i, listQueue);
+  robot.respond(/queue (dump|debug)/i, queueDump);
 
   robot.respond(/deploy ping/i, function(res) {
     res.send('deploy pong');
@@ -28,14 +28,14 @@ module.exports = function(robot) {
    */
   function help(res) {
     res.send(
-      '`deploy add _metadata_`: Add yourself to the deploy queue. Hubot give you a heads up when it\'s your turn. Anything after `add` will be included in messages about what you\'re deploying, if you\'re into that sort of thing. Something like `hubot deploy add my_api`.\n' +
-      '`deploy done`: Say this when you\'re done and then Hubot will tell the next person. Or you could say `deploy complete` or `deploy donzo`.\n' +
-      '`deploy remove _user_`: Removes a user completely from the queue. Use `remove me` to remove yourself. As my Uncle Ben said, with great power comes great responsibility. Expect angry messages if this isn\'t you remove someone else who isn\'t expecting it. Also works with `deploy kick _user_`.\n' +
-      '`deploy current`: Tells you who\'s currently deploying. Also works with `deploy who\'s deploying` and `deploy who\'s at bat`.\n' +
-      '`deploy next`: Sneak peek at the next person in line. Do this if the anticipation is killing you. Also works with `deploy who\'s next` and `deploy who\'s on first`.\n' +
-      '`deploy list`: Lists the queue. Use wisely, it\'s going to ping everyone :)\n' +
-      '`deploy debug`: Kinda like `deploy list`, but for nerds.\n' +
-      '`deploy help`: This thing.'
+      '`queue add _metadata_`: Add yourself to the deploy queue. Hubot give you a heads up when it\'s your turn. Anything after `add` will be included in messages about what you\'re deploying, if you\'re into that sort of thing. Something like `hubot deploy add my_api`.\n' +
+      '`queue done`: Say this when you\'re done and then Hubot will tell the next person. Or you could say `queue complete` or `queue donzo`.\n' +
+      '`queue remove _user_`: Removes a user completely from the queue. Use `remove me` to remove yourself. As my Uncle Ben said, with great power comes great responsibility. Expect angry messages if this isn\'t you remove someone else who isn\'t expecting it. Also works with `queue kick _user_`.\n' +
+      '`queue current`: Tells you who\'s currently deploying. Also works with `queue who\'s deploying` and `queue who\'s at bat`.\n' +
+      '`queue next`: Sneak peek at the next person in line. Do this if the anticipation is killing you. Also works with `queue who\'s next` and `queue who\'s on first`.\n' +
+      '`queue list`: Lists the queue. Use wisely, it\'s going to ping everyone :)\n' +
+      '`queue debug`: Kinda like `queue list`, but for nerds.\n' +
+      '`queue help`: This thing.'
     );
   }
 
