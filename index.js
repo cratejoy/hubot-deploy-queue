@@ -3,12 +3,9 @@ var queue = require('./lib/queue')
 
 
 module.exports = function(robot) {
-  console.log("DQ: being setup");
-
   robot.brain.on('loaded', function() {
-    console.log("DQ: loaded");
-    robot.brain.deploy = robot.brain.deploy || {};
-    queue.init(robot.brain.deploy);
+    robot.brain.data.deploy = robot.brain.data.deploy || {};
+    queue.init(robot.brain.data.deploy);
   });
 
   robot.respond(/dq help/i, help);
@@ -64,7 +61,7 @@ module.exports = function(robot) {
     }
 
     if (length === 1) {
-      res.reply('Alrighty, you\'re up next!');
+      res.reply('Alrighty, you\'re up after current deployer.');
       return;
     }
 
@@ -106,7 +103,7 @@ module.exports = function(robot) {
       , user = {name: name};
 
     if (queue.isEmpty()) {
-      res.send('Nobodyz!');
+      res.send('Nobody!');
     } else if (queue.isCurrent(user)) {
       res.reply('It\'s you. _You\'re_ deploying. Right now.');
     } else {
@@ -127,7 +124,7 @@ module.exports = function(robot) {
       , next = queue.next();
 
     if (!next) {
-      res.send('Nobodyz!');
+      res.send('Nobody!');
     } else if (queue.isNext({name: user})) {
       res.reply('You\'re up next! Get ready!');
     } else {
@@ -188,7 +185,7 @@ module.exports = function(robot) {
    */
   function listQueue(res) {
     if (queue.isEmpty()) {
-      res.send('Nobodyz! Like this: []');
+      res.send('Nobody! Like this: []');
     } else {
       res.send('Here\'s who\'s in the queue: ' + _.pluck(queue.get(), 'name').join(', ') + '.');
     }
