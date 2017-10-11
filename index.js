@@ -3,8 +3,13 @@ var queue = require('./lib/queue')
 
 
 module.exports = function(robot) {
-  robot.brain.deploy = robot.brain.deploy || {};
-  queue.init(robot.brain.deploy);
+  console.log("DQ: being setup");
+
+  robot.brain.on('loaded', function() {
+    console.log("DQ: loaded");
+    robot.brain.deploy = robot.brain.deploy || {};
+    queue.init(robot.brain.deploy);
+  });
 
   robot.respond(/dq help/i, help);
   robot.respond(/dq (add)(.*)?/i, queueUser);
@@ -205,4 +210,3 @@ module.exports = function(robot) {
     robot.messageRoom(user.name, 'Hey, your turn to deploy!');
   }
 };
-
